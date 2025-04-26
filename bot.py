@@ -43,7 +43,8 @@ def wrap_text(text, font, max_width, draw):
     return lines
 
 # 🔠 Подбираем лучший размер шрифта
-def get_best_font_size(text, max_width, draw, font_path="Arial.ttf", max_font_size=60, min_font_size=20):
+def get_best_font_size(text, max_width, draw, font_path="arial_bolditalicmt.ttf"
+, max_font_size=60, min_font_size=20):
     for size in range(max_font_size, min_font_size - 1, -2):
         try:
             font = ImageFont.truetype(font_path, size=size)
