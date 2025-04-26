@@ -43,13 +43,14 @@ def wrap_text(text, font, max_width, draw):
     return lines
 
 # 🔠 Подбираем лучший размер шрифта
-def get_best_font_size(text, max_width, draw, font_path="arial_bolditalicmt.ttf"
-, max_font_size=60, min_font_size=20):
+def get_best_font_size(text, max_width, draw, font_path="arial_bolditalicmt.ttf", max_font_size=60, min_font_size=20):
     for size in range(max_font_size, min_font_size - 1, -2):
         try:
             font = ImageFont.truetype(font_path, size=size)
+            print(f"✅ Успешно загружен шрифт: {font_path} размер {size}")
         except:
             font = ImageFont.load_default()
+            print("⚠️ Не удалось загрузить шрифт, используется стандартный.")
         lines = wrap_text(text, font, max_width, draw)
         fits = True
         for line in lines:
@@ -61,6 +62,7 @@ def get_best_font_size(text, max_width, draw, font_path="arial_bolditalicmt.ttf"
         if fits:
             return font
     return font
+
 
 # 🐱 Генерация мема с котом
 def generate_cat_meme():
