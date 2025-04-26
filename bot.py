@@ -210,9 +210,23 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # 🚀 Запуск бота
 if __name__ == '__main__':
+    BOT_TOKEN = os.environ.get('TELEGRAM_API_KEY')
+    WEBHOOK_URL = os.environ.get('WEBHOOK_URL')
+    PORT = int(os.environ.get('PORT', 8443))
+
     app = ApplicationBuilder().token(BOT_TOKEN).build()
+
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    print("Бот запущен. Нажми Ctrl+C для остановки.")
-    app.run_polling()
+
+    print("Бот запущен через вебхук.")
+
+    app.run_webhook(
+        listen="0.0.0.0",
+        port=PORT,
+        webhook_url=WEBHOOK_URL
+    )
+
+
+
 
